@@ -6,7 +6,7 @@
 /*   By: jpolania <jpolania@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/17 16:24:13 by jpolania          #+#    #+#             */
-/*   Updated: 2026/06/19 12:40:52 by jpolania         ###   ########.fr       */
+/*   Updated: 2026/06/19 13:34:48 by jpolania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,10 @@
 
 int parsing(t_info *info, char **argv)
 {
-    int count;
     int i;
     
     i = 0;
-    count = flags_validator(info, argv);
+    info->skip_position = flags_validator(info, argv);
     if (info->flags == ERROR)
         return (1);
     if (validate_dupes(argv))
@@ -27,6 +26,7 @@ int parsing(t_info *info, char **argv)
     {
         if ((ft_is_not_int(argv[i])))
 		    return (1);
+        i++;
     }
-    return (count);
+    return (0);
 }

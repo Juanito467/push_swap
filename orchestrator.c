@@ -6,7 +6,7 @@
 /*   By: jpolania <jpolania@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/10 15:02:35 by jpolania          #+#    #+#             */
-/*   Updated: 2026/06/19 12:38:17 by jpolania         ###   ########.fr       */
+/*   Updated: 2026/06/19 13:53:27 by jpolania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	orchestrator(t_stack **a, t_stack **b, t_info *info)
 		sort_3(a);
     else if (info->size <= 5)
         sort_5(a, b, info->size);
-	else if (info->size <= 100)
+	else if (info->flags == SIMPLE)
     {
         printf("We are going to use Insertion!\n");
         insertion(a, b, info->size);

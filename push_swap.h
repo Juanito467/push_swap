@@ -25,6 +25,7 @@ typedef enum e_flags
 typedef struct s_info
 {
 	int				bench;
+	int				skip_position;
 	t_flags			flags;
 	float			disorder;
 	int				size;

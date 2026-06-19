@@ -6,7 +6,7 @@
 /*   By: jpolania <jpolania@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/04 12:30:45 by jpolania          #+#    #+#             */
-/*   Updated: 2026/06/19 10:11:46 by jpolania         ###   ########.fr       */
+/*   Updated: 2026/06/19 13:41:25 by jpolania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,14 @@ void	insertion(t_stack **a, t_stack **b, int size)
 	int i;
 
 	i = 0;
-	while (size != i)
+	while (i != size)
 	{
 		if (!*b)
 			pb(b,a);
-		cheapest = find_cheapest(a, b, size - i);
-		rotate_a_to_position(a, cheapest, size - i);
+		cheapest = find_cheapest(a, b, size);
+		rotate_a_to_position(a, cheapest, size);
 		rotations_b = ft_rotations_cost(*b, (*a)->content);
-		rotate_b_to_position(b, rotations_b, size - i);
+		rotate_b_to_position(b, rotations_b, size);
 		pb(b, a);
 		i++;
 	}

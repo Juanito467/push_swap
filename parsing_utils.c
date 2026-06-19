@@ -6,22 +6,11 @@
 /*   By: jpolania <jpolania@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/19 11:25:44 by jpolania          #+#    #+#             */
-/*   Updated: 2026/06/19 12:37:21 by jpolania         ###   ########.fr       */
+/*   Updated: 2026/06/19 13:53:05 by jpolania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-
-
-
-
-
-
-
-
-
-
 
 
 int    flags_validator(t_info *info, char **argv)
