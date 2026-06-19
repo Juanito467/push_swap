@@ -1,38 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   disorder.c                                         :+:      :+:    :+:   */
+/*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jpolania <jpolania@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/03 09:44:26 by jpolania          #+#    #+#             */
-/*   Updated: 2026/06/17 15:39:13 by jpolania         ###   ########.fr       */
+/*   Created: 2026/06/17 16:24:13 by jpolania          #+#    #+#             */
+/*   Updated: 2026/06/19 12:40:52 by jpolania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-float disorder (int *stack, int size)
+int parsing(t_info *info, char **argv)
 {
-    float mistakes;
-    float total_pairs;
+    int count;
     int i;
-    int j;
     
     i = 0;
-    mistakes = 0;
-    total_pairs = 0;
-    while (i < size)
+    count = flags_validator(info, argv);
+    if (info->flags == ERROR)
+        return (1);
+    if (validate_dupes(argv))
+        return (1);
+    while (argv[i])
     {
-        j = i + 1;
-        while (j < size)
-        {
-            total_pairs += 1;
-            if (stack[i] > stack[j])
-                mistakes += 1;
-            j++;
-        }
-        i++;
+        if ((ft_is_not_int(argv[i])))
+		    return (1);
     }
-    return (mistakes / total_pairs);
+    return (count);
 }

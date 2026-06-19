@@ -6,31 +6,11 @@
 /*   By: jpolania <jpolania@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 16:04:18 by jpolania          #+#    #+#             */
-/*   Updated: 2026/06/04 11:50:48 by jpolania         ###   ########.fr       */
+/*   Updated: 2026/06/16 09:52:55 by jpolania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-t_stack	*ft_stacklast(t_stack *lst)
-{
-	if (!lst)
-		return (NULL);
-	while (lst->next != NULL)
-		lst = lst->next;
-	return (lst);
-}
-
-int	stack_check(t_stack *a)
-{
-	while (a && a->next)
-	{
-		if (a > a->next)
-			return (1);
-		a = a->next;
-	}
-	return (0);
-}
 
 int	ft_atoi(const char *nptr)
 {
@@ -57,42 +37,14 @@ int	ft_atoi(const char *nptr)
 	return (result * sign);
 }
 
-t_stack	*ft_lstnew(void *content)
+t_stack	*ft_min(t_stack *a)
 {
-	t_stack	*list;
-
-	list = malloc(sizeof(t_stack));
-	if (!list)
-		return (NULL);
-	list->content = content;
-	list->next = NULL;
-	return (list);
-}
-
-void	ft_lstadd_back(t_stack **lst, t_stack *new)
-{
-	t_stack	*temp;
-
-	if (!lst || !new)
-		return ;
-	if (*lst == NULL)
-	{
-		*lst = new;
-		return ;
-	}
-	temp = *lst;
-	while (temp->next != NULL)
-		temp = temp->next;
-	temp->next = new;
-}
-
-t_stack	*ft_min(t_stack **a)
-{
+	printf("FT_MIN!\n");
 	t_stack	*min;
 	t_stack	*walk;
 
-	min = *a;
-	walk = *a;
+	min = a;
+	walk = a;
 	while (walk)
 	{
 		if (min->content > walk->content)
@@ -102,13 +54,13 @@ t_stack	*ft_min(t_stack **a)
 	return (min);
 }
 
-t_stack	*ft_max(t_stack **a)
+t_stack	*ft_max(t_stack *a)
 {
 	t_stack	*max;
 	t_stack	*walk;
 	
-	max = *a;
-	walk = *a;
+	max = a;
+	walk = a;
 	while (walk)
 	{
 		if (max->content < walk->content)

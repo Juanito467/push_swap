@@ -3,24 +3,29 @@
 /*                                                        :::      ::::::::   */
 /*   rra.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpolania <jpolania@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: davgonca <davgonca@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/01 17:07:47 by jpolania          #+#    #+#             */
-/*   Updated: 2026/06/01 17:23:35 by jpolania         ###   ########.fr       */
+/*   Updated: 2026/06/12 17:40:00 by davgonca         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	rra(t_stack **a)
+void    rra(t_stack **a)
 {
-	t_stack	*last;
+    t_stack *last;
+    t_stack *head;
 
-	last = ft_stacklast(*a);
-	last->previous->next = NULL;
-	last->next = *a;
-	*a = last;
-	(*a)->previous = NULL;
+    if (!*a || !(*a)->next)
+        return ;
+    head = *a;
+    last = ft_stacklast(*a);
+    last->previous->next = NULL;   
+    last->previous = NULL;         
+    last->next = head;             
+    head->previous = last;         
+    *a = last;                     
 }
 void	rrb(t_stack **b)
 {

@@ -6,7 +6,7 @@
 /*   By: jpolania <jpolania@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/03 09:30:21 by davgonca          #+#    #+#             */
-/*   Updated: 2026/06/04 12:30:32 by jpolania         ###   ########.fr       */
+/*   Updated: 2026/06/16 12:04:49 by jpolania         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,36 +17,40 @@ void sort_3(t_stack **a)
     t_stack *min;
     t_stack *max;
 
-    min = ft_min(a);
-    max = ft_max(a);
+    min = ft_min(*a);
+    max = ft_max(*a);
     if (max == *a && min == (*a)->next)
 		ra(a);
-	if (max == *a && min == (*a)->next->next)
+	else if (max == *a && min == (*a)->next->next)
 	{
 		sa(a);
 		rra(a);
 	}
-	if (max == (*a)->next && min == *a)
+	else if (max == (*a)->next && min == *a)
 	{
 		sa(a);
 		ra(a);		
 	}
-	if (max == (*a)->next->next)
+	else if (max == (*a)->next->next)
 		sa(a);
-	if (max == (*a)->next && min == (*a)->next->next)
-		ra(a);
+	else if (max == (*a)->next && min == (*a)->next->next)
+		rra(a);
 }
 
 void	sort_5(t_stack **a, t_stack **b, int size)
 {
-	rotmin(a, size);
-	pb(a, b);
-	rotmin(a, size - 1);
-	pb(a, b);
+	int i;
+
+	i = 0;
+	while (ft_stacksize(*a) > 3)
+	{
+		rotmin(a, size - i);
+		pb(a, b);
+		i++;
+	}
 	sort_3(a);
-	rotmax(b, 2);
-	pa(b, a);
-	pa(b, a);
+	while(*b)
+		pa(a, b);
 }
 
 void	rotmin(t_stack **a, int size)
@@ -55,7 +59,7 @@ void	rotmin(t_stack **a, int size)
 	t_stack	*walk;
 	t_stack	*target;
 	
-	target = ft_min(a);
+	target = ft_min(*a);
 	i = 0;
 	walk = *a;
 	while (walk != target)
@@ -68,7 +72,7 @@ void	rotmin(t_stack **a, int size)
 		while (*a != target)
 			ra(a);
 	}
-	if ((size / 2) >= i)
+	else if ((size / 2) >= i)
 	{
 		while (*a != target)
 			rra(a);
@@ -81,7 +85,7 @@ void	rotmax(t_stack **a, int size)
 	t_stack	*walk;
 	t_stack	*target;
 	
-	target = ft_max(a);
+	target = ft_max(*a);
 	i = 0;
 	walk = *a;
 	while (walk != target)
