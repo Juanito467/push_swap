@@ -154,3 +154,31 @@ void	rotate_b_to_position(t_stack **b, int rotations, int size)
 			rotations++;
 		}
 }
+
+int     ft_total_cost(int a, int b)
+{
+    int result;
+    
+    result = 0;
+    if (a >= 0 && b >= 0)
+    {
+        if (a > b)
+            result = a;
+        else
+            result = b;
+        return (result);
+    }
+    if(a <= 0 && b <= 0) //exemplo a = -5 b = -2
+    {
+        if (a < b)
+            result = -a;
+        else
+            result = -b;
+        return (result);
+    }
+    if (a > 0 && b < 0)
+        result = a + (-b);
+    if (a < 0 && b > 0)
+        result = (-a) + b;
+    return (result);
+}
