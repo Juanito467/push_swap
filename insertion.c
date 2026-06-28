@@ -21,8 +21,6 @@ void	insertion(t_stack **a, t_stack **b, int size)
 	i = 0;
 	while (i != size)
 	{
-		if (!*b)
-			pb(b,a);
 		cheapest = find_cheapest(a, b, size);
 		rotate_a_to_position(a, cheapest, size);
 		rotations_b = ft_rotations_cost(*b, (*a)->content);
