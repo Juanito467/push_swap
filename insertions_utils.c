@@ -1,19 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   insertions_utils.c                                 :+:      :+:    :+:   */
+/*   insertion_utils.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jpolania <jpolania@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/08 15:27:30 by jpolania          #+#    #+#             */
-/*   Updated: 2026/06/19 12:36:31 by jpolania         ###   ########.fr       */
+/*   Updated: 2026/06/28 06:21:34 by marvin           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_rotations_cost(t_stack *b, int value)
+int	ft_cost_in_b(t_stack *b, int value)
 {
+	int 	size_b;
 	int		rotations;
 	t_stack	*temp;
 	t_stack	*max;
@@ -21,24 +22,52 @@ int	ft_rotations_cost(t_stack *b, int value)
 
 	if (!b)
 		return (0);
+	temp = b;
+	size_b = ft_stacksize(b);
+	rotations = 0;
 	max = ft_max(b);
 	if (value > max->content)
-		return (0);
+	{
+		while (temp && temp->content != max->content)
+		{
+			rotations++;
+			temp = temp->next;
+		}
+		if (rotations < size_b / 2)
+			return (rotations);
+		else
+			return (rotations - size_b);
+	}
 	cost_min = ft_min(b);
 	if (value < cost_min->content)
-		return (1);
-	temp = b;
-	rotations = 0;
+	{
+		while (temp && temp->content != cost_min->content)
+		{
+			rotations++;
+			temp = temp->next;
+		}
+		if (rotations < size_b / 2)
+			return (rotations);
+		else
+			return (rotations - size_b);
+	}
+	
 	while (temp)
 	{
 		if (temp->next && (temp)->content > value
 			&& (temp)->next->content < value)
-			return (rotations);
-		rotations += 1;
+		{
+			if (rotations < size_b / 2)
+				return (rotations);
+			else
+				return (rotations - size_b);
+		}
+		rotations++;
 		temp = temp->next;
 	}
 	return (0); 
 }
+
 int	ft_cost_in_a(t_stack *a, int value, int size)
 {
 	int		i;
@@ -53,7 +82,7 @@ int	ft_cost_in_a(t_stack *a, int value, int size)
 			if (i < size / 2)
 				return (i);
 			else
-				return (size - i);
+				return (-(size - i));
 		}
 		i += 1;
 		temp = temp->next;
@@ -65,6 +94,7 @@ int	find_cheapest(t_stack **a, t_stack **b, int size)
 {
 	t_stack	*temp;
 	int		cost_min;
+	int 	total_cost;
 	int		cost_a;
 	int		cost_b;
 	int		cheapest;
@@ -76,15 +106,20 @@ int	find_cheapest(t_stack **a, t_stack **b, int size)
 	while (temp)
 	{
 		cost_a = ft_cost_in_a(*a, temp->content, size);
-		cost_b = ft_rotations_cost(*b, temp->content);
-		if ((cost_a + cost_b) < cost_min)
+		cost_b = ft_cost_in_b(*b, temp->content);
+		total_cost = ft_total_cost(cost_a, cost_b);
+		printf("Cost a: %d\n", cost_a);
+		printf("Cost b: %d\n", cost_b);
+		printf("Total cost: %d\n", total_cost);
+		if (total_cost < cost_min)
 		{
-			cost_min = cost_a + cost_b;
+			cost_min = total_cost;
 			cheapest = index;
 		}
 		index++;
 		temp = temp->next;
 	}
+	printf("The value in the current cheapest is: %d\n", cheapest);
 	return (cheapest);
 }
 void	rotate_a_to_position(t_stack **a, int position, int size)
